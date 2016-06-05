@@ -23,8 +23,8 @@ router.route("/customers")
 	    Customer.find({}, function(err, data) {
 	    if (!err) {
 	    	for (i in data) {
-				i.__v = undefined;
-				i._id = undefined;
+				data[i].__v = undefined;
+				data[i]._id = undefined;
 	    	}
 	    	res.json(data);
 	    }
@@ -69,8 +69,8 @@ router.route("/cat")
     .get(function(req,res){
 	    Entry.find({}, function(err, data) {
 	    for (i in data) {
-			i._id = undefined;
-	    	i.__v = undefined;
+				data[i].__v = undefined;
+				data[i]._id = undefined;
 	    	}
 	    if (!err) res.json(data);
 	    });
