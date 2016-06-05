@@ -27,7 +27,13 @@ router.route("/customers")
     .post(function(req,res){
 		var c = new Customer(req.body);
 		c.save()
-		res.json({return: "success"});
+		Entry.find({id:c.id}, function(err, data) {
+			if (!err) {
+				res.Location("/customers/"+c.id);
+				res.json(data);
+				res.sendStatus(201);
+			}
+		});
     });
 
 router.route("/customers/:id")
@@ -43,6 +49,41 @@ router.route("/customers/:id")
             res.json(response);
         });
     })
+
+router.route("/cat")
+    .get(function(req,res){
+	    Entry.find({}, function(err, data) {
+	    if (!err) res.json(data);
+	    });
+    })
+    .post(function(req,res){
+		var e = new Entry(req.body);
+		e.save();
+		Entry.find({id:e.id}, function(err, data) {
+			if (!err) {
+				res.Location("/cat/"+e.id);
+				res.json(data);
+				res.sendStatus(201);
+
+			}
+		});
+
+    });
+
+router.route("/cat/:id")
+    .get(function(req,res){
+        var response = {};
+        Entry.find({id: req.params.id} ,function(err,data){
+        // This will run Mongo Query to fetch data based on ID.
+            if(err) {
+                response = {"error" : true,"message" : "Error fetching data"};
+            } else {
+                response = data;
+            }
+            res.json(response);
+        });
+    })
+
 
 app.use('/',router);
 
