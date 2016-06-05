@@ -11,10 +11,10 @@ services:
     ports:
      - "8000:8000"
     links:
-     - "mongo:mongo"
+     - "mongo:mongo-data"
     depends_on:
-     - mongo
-  mongo:
+     - mongo-data
+  mongo-data:
     build: 
       context: .
       dockerfile: Dockerfile-mongo
