@@ -5,6 +5,9 @@ ADD data/*.json /data/
 RUN mongod & \
 	mongoimport --db test --collection customers /data/customers.json && \
 	mongoimport --db test --collection entries /data/entries.json 
-EXPOSE 27017
 	
+VOLUME /data/db /data/configdb
+EXPOSE 27017
+
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["mongod"]
