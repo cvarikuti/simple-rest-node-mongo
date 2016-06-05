@@ -27,7 +27,7 @@ router.route("/customers")
     .post(function(req,res){
 		var c = new Customer(req.body);
 		c.save()
-		Entry.findOne({id:c.id}, function(err, data) {
+		Customer.findOne({id:c.id}, function(err, data) {
 			console.log(data);
 			if (!err) {
 				res.set("Location","/customers/"+c.id);
