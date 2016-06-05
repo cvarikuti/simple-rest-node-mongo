@@ -28,6 +28,7 @@ router.route("/customers")
 		var c = new Customer(req.body);
 		c.save()
 		Entry.findOne({id:c.id}, function(err, data) {
+			console.log(data);
 			if (!err) {
 				res.set("Location","/customers/"+c.id);
 				res.status(201).json(data);
