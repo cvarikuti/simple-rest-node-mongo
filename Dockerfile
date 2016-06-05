@@ -7,5 +7,5 @@ RUN apk --update add nodejs  && \
 
 ADD src/*.js /home/root/js/
 EXPOSE 8000
-RUN /home/root/js/populate.js
+RUN node /home/root/js/populate.js
 ENTRYPOINT forever /home/root/js/server.js
