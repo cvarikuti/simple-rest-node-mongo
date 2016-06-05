@@ -37,8 +37,8 @@ router.route("/customers")
 			
 			if (!err) {
 				// remove internal fields from Mongo
-				delete data.__v;
-				delete data._id;
+				data.__v = undefined;
+				data._id = undefined;
 				
 				res.set("Location","/customers/"+c.id);
 				res.status(201).json(data);
