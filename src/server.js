@@ -23,8 +23,8 @@ router.route("/customers")
 	    Customer.find({}, function(err, data) {
 	    if (!err) {
 	    	for (i in data) {
-	    		delete i._id;
-	    		delete i.__v;
+				i.__v = undefined;
+				i._id = undefined;
 	    	}
 	    	res.json(data);
 	    }
@@ -53,8 +53,9 @@ router.route("/customers/:id")
         // This will run Mongo Query to fetch data based on ID.
             if(!err) {
                 // remove internal fields from Mongo
-				delete data.__v;
-				delete data._id;
+				data.__v = undefined;
+				data._id = undefined;
+				
 				res.json(data);
                                
             }
@@ -68,8 +69,8 @@ router.route("/cat")
     .get(function(req,res){
 	    Entry.find({}, function(err, data) {
 	    for (i in data) {
-	    		delete i._id;
-	    		delete i.__v;
+			i._id = undefined;
+	    	i.__v = undefined;
 	    	}
 	    if (!err) res.json(data);
 	    });
@@ -80,9 +81,9 @@ router.route("/cat")
 		Entry.findOne({id:e.id}, function(err, data) {
 			if (!err) {
 				// remove internal fields from Mongo
-				delete data.__v;
-				delete data._id;
-
+				data.__v = undefined;
+				data._id = undefined;
+				
 				res.set("Location","/cat/"+e.id);
 				res.status(201).json(data);
 			}
@@ -97,8 +98,8 @@ router.route("/cat/:id")
         // This will run Mongo Query to fetch data based on ID.
             if(!err) {
                 // remove internal fields from Mongo
-				delete data.__v;
-				delete data._id;
+				data.__v = undefined;
+				data._id = undefined;
 				res.json(data);
                                
             }
