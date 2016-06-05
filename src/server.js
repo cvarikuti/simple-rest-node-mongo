@@ -2,12 +2,14 @@ var express     =   require("express");
 var app         =   express();
 var bodyParser  =   require("body-parser");
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://mongo/test');
 module.exports.mongoose = mongoose;
 var Customer     =   require("./Customer.js");
 var Entry = require("./Entry.js")
 var router      =   express.Router();
 var db = mongoose.connection;
+
+console.log("starting");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({"extended" : false}));
@@ -45,4 +47,4 @@ router.route("/customers/:id")
 app.use('/',router);
 
 app.listen(8000);
-console.log("Listening to PORT 3000");
+console.log("Listening to PORT 8000");

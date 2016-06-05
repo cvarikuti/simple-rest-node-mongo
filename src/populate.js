@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://mongo/test');
 module.exports.mongoose = mongoose;
 
 var Entry = require("./Entry.js")

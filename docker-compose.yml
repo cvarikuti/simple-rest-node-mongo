@@ -4,7 +4,11 @@ version: '2'
 
 services:
   node:
-    build: .
+    container_name: node
+    build: 
+      context: .
+      dockerfile: Dockerfile-node
+    image: pizak/simple-rest-node-mongo
     ports:
      - "8000:8000"
     links:
@@ -12,5 +16,10 @@ services:
     depends_on:
      - mongo
   mongo:
-    image: mongo:3.3
+    build: 
+      context: .
+      dockerfile: Dockerfile-mongo
+    container_name: mongo
+    image: pizak/mongo-with-data
+
      
