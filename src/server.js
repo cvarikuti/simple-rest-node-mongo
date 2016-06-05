@@ -29,7 +29,7 @@ router.route("/customers")
 		c.save()
 		Entry.find({id:c.id}, function(err, data) {
 			if (!err) {
-				res.Location("/customers/"+c.id);
+				res.setHeader("Location","/cat/"+c.id);
 				res.json(data);
 				res.sendStatus(201);
 			}
@@ -61,7 +61,7 @@ router.route("/cat")
 		e.save();
 		Entry.find({id:e.id}, function(err, data) {
 			if (!err) {
-				res.Location("/cat/"+e.id);
+				res.setHeader("Location","/cat/"+e.id);
 				res.json(data);
 				res.sendStatus(201);
 
