@@ -4,20 +4,18 @@ version: '2'
 
 services:
   node:
-    container_name: node
     build: 
       context: .
       dockerfile: Dockerfile-node
     ports:
      - "8000:8000"
     links:
-     - "mongo-data:mongo"
+     - "mongo-data:mongo-data"
     depends_on:
      - mongo-data
   mongo-data:
     build: 
       context: .
       dockerfile: Dockerfile-mongo
-    container_name: mongo-data
 
      

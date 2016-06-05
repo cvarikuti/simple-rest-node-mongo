@@ -2,7 +2,7 @@ var express     =   require("express");
 var app         =   express();
 var bodyParser  =   require("body-parser");
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://mongo/test');
+mongoose.connect('mongodb://mongo-data/test');
 module.exports.mongoose = mongoose;
 var Customer     =   require("./Customer.js");
 var Entry = require("./Entry.js")
