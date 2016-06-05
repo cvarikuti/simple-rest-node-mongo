@@ -29,7 +29,8 @@ router.route("/customers")
 		c.save()
 		Entry.findOne({id:c.id}, function(err, data) {
 			if (!err) {
-				res.status(201).set("Location","/customers/"+c.id).json(data);
+				res.set("Location","/customers/"+c.id);
+				res.status(201).json(data);
 			}
 		});
     });
@@ -59,8 +60,8 @@ router.route("/cat")
 		e.save();
 		Entry.findOne({id:e.id}, function(err, data) {
 			if (!err) {
-				
-				res.status(201).set("Location","/cat/"+e.id).json(data);
+				res.set("Location","/cat/"+e.id);
+				res.status(201).json(data);
 			}
 		});
 
