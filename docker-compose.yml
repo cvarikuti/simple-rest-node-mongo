@@ -1,0 +1,16 @@
+# supports version 2 of the docker compose language. 
+# Requires docker compose 1.6 or later
+version: '2'
+
+services:
+  node:
+    build: .
+    ports:
+     - "8000:8000"
+    links:
+     - "mongo:mongo"
+    depends_on:
+     - mongo
+  mongo:
+    image: mongo:3.3
+     
