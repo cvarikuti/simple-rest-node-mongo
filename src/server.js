@@ -27,9 +27,9 @@ router.route("/customers")
     .post(function(req,res){
 		var c = new Customer(req.body);
 		c.save()
-		Entry.find({id:c.id}, function(err, data) {
+		Entry.findOne({id:c.id}, function(err, data) {
 			if (!err) {
-				res.set("Location","/cat/"+c.id);
+				res.set("Location","/customers/"+c.id);
 				res.sendStatus(201).json(data);
 			}
 		});
@@ -38,7 +38,7 @@ router.route("/customers")
 router.route("/customers/:id")
     .get(function(req,res){
         var response = {};
-        Customer.find({id: req.params.id} ,function(err,data){
+        Customer.findOne({id: req.params.id} ,function(err,data){
         // This will run Mongo Query to fetch data based on ID.
             if(err) {
                 response = {"error" : true,"message" : "Error fetching data"};
@@ -58,7 +58,7 @@ router.route("/cat")
     .post(function(req,res){
 		var e = new Entry(req.body);
 		e.save();
-		Entry.find({id:e.id}, function(err, data) {
+		Entry.findOne({id:e.id}, function(err, data) {
 			if (!err) {
 				res.set("Location","/cat/"+e.id);
 				res.status(201).json(data);
@@ -70,7 +70,7 @@ router.route("/cat")
 router.route("/cat/:id")
     .get(function(req,res){
         var response = {};
-        Entry.find({id: req.params.id} ,function(err,data){
+        Entry.findOne({id: req.params.id} ,function(err,data){
         // This will run Mongo Query to fetch data based on ID.
             if(err) {
                 response = {"error" : true,"message" : "Error fetching data"};
