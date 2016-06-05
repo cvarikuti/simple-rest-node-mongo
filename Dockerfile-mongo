@@ -5,6 +5,6 @@ ADD data/*.json /data/
 RUN mongod & \
 	mongoimport --db test --collection customers /data/customers.json && \
 	mongoimport --db test --collection entries /data/entries.json && \
-	sudo pkill mongod
+
 	
 CMD ["mongod"]
