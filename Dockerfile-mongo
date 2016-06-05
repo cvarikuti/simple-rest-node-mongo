@@ -1,8 +1,10 @@
 FROM mongo
 RUN mkdir -p /data
 ADD data/*.json /data/
+# at build time add data
 RUN mongod & \
 	mongoimport --db test --collection customers /data/customers.json && \
 	mongoimport --db test --collection entries /data/entries.json && \
-	pkill mongod
+	sudo pkill mongod
+	
 CMD ["mongod"]
