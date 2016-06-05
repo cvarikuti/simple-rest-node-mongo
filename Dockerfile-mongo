@@ -1,8 +1,8 @@
 FROM mongo
 RUN mkdir -p /data
 ADD data/*.json /data/
-RUN mongod &
-RUN mongoimport --db test --collection customers /data/customers.json
-RUN mongoimport --db test --collection entries /data/entries.json
-RUN pkill mongod
+RUN mongod & \
+	mongoimport --db test --collection customers /data/customers.json && \
+	mongoimport --db test --collection entries /data/entries.json && \
+	pkill mongod
 CMD ["mongod"]
