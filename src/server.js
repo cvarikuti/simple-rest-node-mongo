@@ -14,12 +14,11 @@ console.log("starting");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({"extended" : false}));
 
-router.get("/",function(req,res){
+app.get("/",function(req,res){
     res.json({"message" : "mongo rest server app"});
 });
 
-router.route("/customers")
-    .get(function(req,res){
+app.get("/customers", function(req,res){
 	    Customer.find({}, function(err, data) {
 	    if (!err && data) {
 	    	for (i in data) {
@@ -28,9 +27,10 @@ router.route("/customers")
 	    	}
 	    	res.json(data);
 	    }
-	    });
-    })
-    .post(function(req,res){
+	});
+	    
+	    
+app.post("/customers", function(req,res){
 		var c = new Customer(req.body);
 		c.save()
 		Customer.findOne({id:c.id}, function(err, data) {
@@ -44,10 +44,10 @@ router.route("/customers")
 				res.status(201).json(data);
 			}
 		});
+		
     });
 
-router.route("/customers/:id")
-    .get(function(req,res){
+app.get("/customers/:id", function(req,res){
         var response = {};
         Customer.findOne({id: req.params.id} ,function(err,data){
         // This will run Mongo Query to fetch data based on ID.
@@ -61,10 +61,9 @@ router.route("/customers/:id")
             	res.sendStatus(404);
 			}
         });
-    })
+    });
 
-router.route("/cat")
-    .get(function(req,res){
+app.get("/cat", function(req,res){
 	    Entry.find({}, function(err, data) {
 	    for (i in data) {
 				data[i].__v = undefined;
@@ -72,8 +71,10 @@ router.route("/cat")
 	    	}
 	    if (!err && data) res.json(data);
 	    });
-    })
-    .post(function(req,res){
+    });
+    
+
+app.post("/cat", function(req,res){
 		var e = new Entry(req.body);
 		e.save();
 		Entry.findOne({id:e.id}, function(err, data) {
@@ -89,8 +90,7 @@ router.route("/cat")
 
     });
 
-router.route("/cat/:id")
-    .get(function(req,res){
+app.get("/cat/:id", function(req,res){
         var response = {};
         Entry.findOne({id: req.params.id} ,function(err,data){
         // This will run Mongo Query to fetch data based on ID.
@@ -105,10 +105,7 @@ router.route("/cat/:id")
             	res.sendStatus(404);
 			}
         });
-    })
-
-
-app.use('/',router);
+    });
 
 app.listen(8000);
 console.log("Listening to PORT 8000");
